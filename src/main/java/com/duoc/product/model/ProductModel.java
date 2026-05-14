@@ -40,6 +40,6 @@ public class ProductModel {
     private String categoria;
 
     @Column(nullable = false)
-    private Boolean activo;
+    private Boolean activo = true;
 
 }
