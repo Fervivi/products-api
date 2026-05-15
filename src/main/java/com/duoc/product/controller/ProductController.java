@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -28,5 +31,12 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> createProduct(@RequestBody ProductRequestDto request) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
+
+
     }
 }
