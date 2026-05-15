@@ -13,6 +13,9 @@ import com.duoc.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -47,5 +50,9 @@ public class ProductService {
         ProductModel savedProduct = productRepository.save(product);
 
         return mapToResponseDto(savedProduct);
+    }
+
+    public List<ProductResponseDto> getAllProducts() {
+        return productRepository.findAll().stream().map(this::mapToResponseDto).toList();
     }
 }
