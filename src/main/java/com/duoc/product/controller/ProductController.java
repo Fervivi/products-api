@@ -9,7 +9,7 @@ package com.duoc.product.controller;
 import com.duoc.product.dto.request.ProductRequestDto;
 import com.duoc.product.dto.response.ProductResponseDto;
 import com.duoc.product.service.ProductService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
