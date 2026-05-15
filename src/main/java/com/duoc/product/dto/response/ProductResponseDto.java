@@ -19,8 +19,8 @@ public class ProductResponseDto {
     private Long id;
     private String nombre;
     private String descripcion;
-    private BigDecimal precion;
+    private BigDecimal precio;
     private Integer stock;
     private String categoria;
-    private Boolean actvo;
+    private Boolean activo;
 }

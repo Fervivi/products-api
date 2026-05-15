@@ -25,10 +25,10 @@ public class ProductService {
 
         response.setId(product.getId());
         response.setNombre(product.getNombre());
-        response.setPrecion(product.getPrecio());
+        response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
         response.setCategoria(product.getCategoria());
-        response.setActvo(product.getActivo());
+        response.setActivo(product.getActivo());
 
         return response;
     }
