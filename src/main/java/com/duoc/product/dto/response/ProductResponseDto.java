@@ -1,7 +1,12 @@
+/*
+ * Copyright © 2026 DuocUC FullStack 1
+ * Eduardo Bray
+ * Rodrigo Callealta
+ * Fernando Villalobos
+ */
 package com.duoc.product.dto.response;
 
 import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +23,4 @@ public class ProductResponseDto {
     private Integer stock;
     private String categoria;
     private Boolean actvo;
-
 }

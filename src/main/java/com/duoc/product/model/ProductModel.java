@@ -1,6 +1,10 @@
+/*
+ * Copyright © 2026 DuocUC FullStack 1
+ * Eduardo Bray
+ * Rodrigo Callealta
+ * Fernando Villalobos
+ */
 package com.duoc.product.model;
-
-import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,7 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +33,7 @@ public class ProductModel {
 
     @Column(nullable = false)
     private String descripcion;
-    
+
     @Column(nullable = false)
     private BigDecimal precio;
 
@@ -41,5 +45,4 @@ public class ProductModel {
 
     @Column(nullable = false)
     private Boolean activo = true;
-
 }
