@@ -1,21 +1,21 @@
 INSERT INTO products (nombre, descripcion, precio, stock, categoria, activo)
 VALUES
-('Notebook Lenovo', 'Notebook Ryzen 7 16GB RAM', 799990.00, 10, 'Tecnologia', 1),
+('Alimento Dog Chow Adulto 15kg', 'Alimento seco para perros adultos de raza mediana y grande', 32990.00, 20, 'Alimentos para perros', 1),
 
-('Mouse Logitech G203', 'Mouse gamer RGB 8000 DPI', 24990.00, 35, 'Perifericos', 1),
+('Alimento Cat Chow Adulto 8kg', 'Alimento seco para gatos adultos con vitaminas y minerales', 26990.00, 18, 'Alimentos para gatos', 1),
 
-('Teclado Redragon Kumara', 'Teclado mecanico switch blue', 45990.00, 20, 'Perifericos', 1),
+('Arena Sanitaria para Gatos 10kg', 'Arena sanitaria aglomerante con control de olores', 9990.00, 35, 'Higiene', 1),
 
-('Monitor Samsung 24', 'Monitor Full HD 75Hz', 149990.00, 12, 'Monitores', 1),
+('Shampoo para Perros 500ml', 'Shampoo suave para perros con aroma fresco', 5990.00, 25, 'Cuidado e higiene', 1),
 
-('Audifonos HyperX Cloud', 'Audifonos gamer con microfono', 69990.00, 18, 'Audio', 1),
+('Correa Ajustable para Perro', 'Correa resistente ajustable para paseo diario', 7990.00, 30, 'Accesorios', 1),
 
-('Silla Gamer Cougar', 'Silla ergonomica reclinable', 189990.00, 5, 'Muebles', 1),
+('Cama para Mascota Mediana', 'Cama acolchada para perros y gatos medianos', 24990.00, 12, 'Descanso', 1),
 
-('SSD Kingston 1TB', 'Disco SSD NVMe M.2', 89990.00, 25, 'Almacenamiento', 1),
+('Snack Dental para Perros 500g', 'Premios dentales para ayudar al cuidado bucal del perro', 8490.00, 22, 'Snacks', 1),
 
-('Procesador Ryzen 7 7800X', 'Procesador AMD Ryzen 8 nucleos', 399990.00, 7, 'Hardware', 1),
+('Comedero Doble Antideslizante', 'Comedero doble para agua y alimento con base antideslizante', 6990.00, 28, 'Accesorios', 1),
 
-('RTX 4070 MSI', 'Tarjeta grafica 12GB GDDR6X', 749990.00, 4, 'Hardware', 1),
+('Juguete Mordedor de Goma', 'Juguete resistente para perros pequeños y medianos', 4990.00, 40, 'Juguetes', 1),
 
-('Webcam Logitech C920', 'Webcam Full HD para streaming', 59990.00, 14, 'Streaming', 1);
+('Alimento Húmedo para Gatos 85g', 'Sobre de alimento húmedo sabor salmón para gatos adultos', 1290.00, 60, 'Alimentos para gatos', 1);
