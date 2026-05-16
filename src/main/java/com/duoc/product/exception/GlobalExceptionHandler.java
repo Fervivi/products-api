@@ -6,9 +6,11 @@
  */
 package com.duoc.product.exception;
 
+import com.duoc.product.dto.DtoApiError;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
