@@ -58,7 +58,7 @@ public class ProductService {
     public ProductResponseDto getProductById(Long id) {
         ProductModel model = productRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
         return mapToResponseDto(model);
     }
