@@ -53,4 +53,12 @@ public class ProductService {
     public List<ProductResponseDto> getAllProducts() {
         return productRepository.findAll().stream().map(this::mapToResponseDto).toList();
     }
+
+    public ProductResponseDto getProductById(Long id) {
+        ProductModel model = productRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourseNotFoundException("Producto no encontrado con id" + id));
+
+        return mapToResponseDto(id);
+    }
 }
