@@ -8,6 +8,7 @@ package com.duoc.product.service;
 
 import com.duoc.product.dto.request.ProductRequestDto;
 import com.duoc.product.dto.response.ProductResponseDto;
+import com.duoc.product.exception.ResourceNotFoundException;
 import com.duoc.product.model.ProductModel;
 import com.duoc.product.repository.ProductRepository;
 import java.util.List;
@@ -57,8 +58,8 @@ public class ProductService {
     public ProductResponseDto getProductById(Long id) {
         ProductModel model = productRepository
                 .findById(id)
-                .orElseThrow(() -> new ResourseNotFoundException("Producto no encontrado con id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id" + id));
 
-        return mapToResponseDto(id);
+        return mapToResponseDto(model);
     }
 }
