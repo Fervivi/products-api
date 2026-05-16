@@ -10,11 +10,9 @@ import com.duoc.product.dto.request.ProductRequestDto;
 import com.duoc.product.dto.response.ProductResponseDto;
 import com.duoc.product.model.ProductModel;
 import com.duoc.product.repository.ProductRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
