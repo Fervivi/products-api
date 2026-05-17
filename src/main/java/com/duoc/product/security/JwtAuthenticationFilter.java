@@ -4,9 +4,11 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.secutiry;
+package com.duoc.product.security;
 
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,10 +65,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // Extrae el token quitando "Bearer "
             String token = header.substring(7);
 
-            // Valida el JWT utilizando l
+            // Valida el JWT utilizando la clave secreta
+            DecodedJWT jwt = JWT.require(
 
-            // Usa algoritmo HMAC256 y la clave secreta
-            Algorithm.HMAC256(secret)
+                            // Usa algoritmo HMAC256 y la clave secreta
+                            Algorithm.HMAC256(secret))
 
                     // Verifica que el emisor sea login-service
                     .withIssuer("login-service")
