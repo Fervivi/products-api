@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -65,9 +64,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // Valida el JWT utilizando l
 
-                    
-                    // Usa algoritmo HMAC256 y la clave secreta
-                            Algorithm.HMAC256(secret))
+            // Usa algoritmo HMAC256 y la clave secreta
+            Algorithm.HMAC256(secret)
 
                     // Verifica que el emisor sea login-service
                     .withIssuer("login-service")

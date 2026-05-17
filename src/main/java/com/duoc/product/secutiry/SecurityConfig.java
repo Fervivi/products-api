@@ -1,14 +1,18 @@
+/*
+ * Copyright © 2026 DuocUC FullStack 1
+ * Eduardo Bray
+ * Rodrigo Callealta
+ * Fernando Villalobos
+ */
 package com.duoc.product.secutiry;
 
-import org.springframework.beans.factory.annotation.Configurable;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -30,18 +34,19 @@ public class SecurityConfig {
                 // Configura aplicación Stateless
                 .sessionManagement(session ->
 
-                // No crear sesiones HTTP
-                session.sessionCreationPolicy(
-                        SessionCreationPolicy.STATELESS))
+                        // No crear sesiones HTTP
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 // Configura reglas de autorización
                 .authorizeHttpRequests(auth -> auth
 
                         // Permite acceso público
-                        .requestMatchers("/api/v1/public/**").permitAll()
+                        .requestMatchers("/api/v1/public/**")
+                        .permitAll()
 
                         // Cualquier otro endpoint requiere autenticación
-                        .anyRequest().authenticated())
+                        .anyRequest()
+                        .authenticated())
 
                 // Agrega JwtAuthenticationFilter antes del filtro estándar
                 .addFilterBefore(
@@ -55,5 +60,4 @@ public class SecurityConfig {
                 // Construye configuración final
                 .build();
     }
-
 }
