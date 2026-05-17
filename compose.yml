@@ -20,7 +20,7 @@ services:
   db:
     image: mysql:lts
     ports:
-      - ${HOST_DB_PORT:-3306}:3306
+      - ${HOST_DB_PORT:-3307}:3306
     env_file:
       - .env
     environment:
