@@ -6,6 +6,7 @@
  */
 package com.duoc.product.secutiry;
 
+import com.auth0.jwt.algorithms.Algorithm;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
