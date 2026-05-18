@@ -17,7 +17,7 @@ public class WebClientConfigProduct {
     public WebClient WebClientProduct() {
         return WebClient.builder()
                 .baseUrl("http://localhost:8082")
-                .defaultHeader("Content-Type", "aplication/json")
+                .defaultHeader("Content-Type", "application/json")
                 .build();
     }
 }
