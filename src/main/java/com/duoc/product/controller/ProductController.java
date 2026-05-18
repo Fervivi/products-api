@@ -6,11 +6,8 @@
  */
 package com.duoc.product.controller;
 
-import com.duoc.product.dto.request.ProductRequestDto;
-import com.duoc.product.dto.response.ProductResponseDto;
-import com.duoc.product.service.ProductService;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.duoc.product.dto.request.ProductRequestDto;
+import com.duoc.product.dto.response.ProductResponseDto;
+import com.duoc.product.service.ProductService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -35,7 +38,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
         ProductResponseDto response = productService.getProductById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
