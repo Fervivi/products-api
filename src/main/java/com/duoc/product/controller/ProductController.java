@@ -6,8 +6,12 @@
  */
 package com.duoc.product.controller;
 
+import com.duoc.product.dto.request.ProductRequestDto;
+import com.duoc.product.dto.response.ProductResponseDto;
+import com.duoc.product.service.ProductService;
+import jakarta.validation.Valid;
 import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,13 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.duoc.product.dto.request.ProductRequestDto;
-import com.duoc.product.dto.response.ProductResponseDto;
-import com.duoc.product.service.ProductService;
-
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
@@ -36,7 +33,6 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
-
     }
 
     @GetMapping("/active")
@@ -49,21 +45,20 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductsByCategoria(categoria));
     }
 
-     @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@Valid@RequestBody ProductRequestDto request) {
+    public ResponseEntity<ProductResponseDto> createProduct(@Valid @RequestBody ProductRequestDto request) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> updateProduct(
-            @PathVariable Long id,
-            @Valid @RequestBody ProductRequestDto request) {
+            @PathVariable Long id, @Valid @RequestBody ProductRequestDto request) {
 
         return ResponseEntity.ok(productService.updateProduct(id, request));
     }
@@ -72,6 +67,4 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto> deactivateProduct(@PathVariable Long id) {
         return ResponseEntity.ok(productService.deactivateProduct(id));
     }
-
-
 }

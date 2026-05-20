@@ -57,28 +57,28 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> getActiveProducts() {
-        return productRepository.findByActivoTrue()
-                .stream()
+        return productRepository.findByActivoTrue().stream()
                 .map(this::mapToResponseDto)
                 .toList();
     }
 
     public List<ProductResponseDto> getProductsByCategoria(String categoria) {
-        return productRepository.findByCategoriaAndActivoTrue(categoria)
-                .stream()
+        return productRepository.findByCategoriaAndActivoTrue(categoria).stream()
                 .map(this::mapToResponseDto)
                 .toList();
     }
 
     public ProductResponseDto getProductById(Long id) {
-        ProductModel product = productRepository.findById(id)
+        ProductModel product = productRepository
+                .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
         return mapToResponseDto(product);
     }
 
     public ProductResponseDto updateProduct(Long id, ProductRequestDto request) {
-        ProductModel product = productRepository.findById(id)
+        ProductModel product = productRepository
+                .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
         product.setNombre(request.getNombre());
@@ -91,13 +91,12 @@ public class ProductService {
     }
 
     public ProductResponseDto deactivateProduct(Long id) {
-        ProductModel product = productRepository.findById(id)
+        ProductModel product = productRepository
+                .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
         product.setActivo(false);
 
         return mapToResponseDto(productRepository.save(product));
     }
-
-   
 }
