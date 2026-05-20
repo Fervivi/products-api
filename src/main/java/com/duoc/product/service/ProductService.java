@@ -6,14 +6,17 @@
  */
 package com.duoc.product.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.duoc.product.dto.request.ProductRequestDto;
 import com.duoc.product.dto.response.ProductResponseDto;
 import com.duoc.product.exception.ResourceNotFoundException;
 import com.duoc.product.model.ProductModel;
 import com.duoc.product.repository.ProductRepository;
-import java.util.List;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -56,11 +59,59 @@ public class ProductService {
         return productRepository.findAll().stream().map(this::mapToResponseDto).toList();
     }
 
+    public List<ProductResponseDto> getActiveProducts() {
+        return productRepository.findByActivoTrue()
+                .stream()
+                .map(this::mapToResponseDto)
+                .toList();
+    }
+
+    public List<ProductResponseDto> getProductsByCategoria(String categoria) {
+        return productRepository.findByCategoriaAndActivoTrue(categoria)
+                .stream()
+                .map(this::mapToResponseDto)
+                .toList();
+    }
+
     public ProductResponseDto getProductById(Long id) {
-        ProductModel model = productRepository
-                .findById(id)
+        ProductModel product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
-        return mapToResponseDto(model);
+        return mapToResponseDto(product);
+    }
+
+    public ProductResponseDto updateProduct(Long id, ProductRequestDto request) {
+        ProductModel product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
+
+        product.setNombre(request.getNombre());
+        product.setDescripcion(request.getDescripcion());
+        product.setPrecio(request.getPrecio());
+        product.setStock(request.getStock());
+        product.setCategoria(request.getCategoria());
+
+        return mapToResponseDto(productRepository.save(product));
+    }
+
+    public ProductResponseDto deactivateProduct(Long id) {
+        ProductModel product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
+
+        product.setActivo(false);
+
+        return mapToResponseDto(productRepository.save(product));
+    }
+
+    public ProductResponseDto updateStock(Long id, Integer stock) {
+        if (stock < 0) {
+            throw new RuntimeException("El stock no puede ser negativo");
+        }
+
+        ProductModel product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
+
+        product.setStock(stock);
+
+        return mapToResponseDto(productRepository.save(product));
     }
 }
