@@ -33,12 +33,22 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
+
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/active")
+    public ResponseEntity<List<ProductResponseDto>> getActiveProducts() {
+        return ResponseEntity.ok(productService.getActiveProducts());
+    }
+
+    @GetMapping("/category/{categoria}")
+    public ResponseEntity<List<ProductResponseDto>> getProductsByCategoria(@PathVariable String categoria) {
+        return ResponseEntity.ok(productService.getProductsByCategoria(categoria));
+    }
+
+     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
-        ProductResponseDto response = productService.getProductById(id);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @PostMapping
@@ -46,4 +56,25 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(request));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> updateProduct(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequestDto request) {
+
+        return ResponseEntity.ok(productService.updateProduct(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ProductResponseDto> deactivateProduct(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.deactivateProduct(id));
+    }
+
+    @PutMapping("/{id}")
+public ResponseEntity<ProductResponseDto> updateProduct(
+        @PathVariable Long id,
+        @Valid @RequestBody ProductRequestDto request) {
+
+    return ResponseEntity.ok(productService.updateProduct(id, request));
+}
 }
