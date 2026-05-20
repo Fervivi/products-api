@@ -99,16 +99,5 @@ public class ProductService {
         return mapToResponseDto(productRepository.save(product));
     }
 
-    public ProductResponseDto updateStock(Long id, Integer stock) {
-        if (stock < 0) {
-            throw new RuntimeException("El stock no puede ser negativo");
-        }
-
-        ProductModel product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
-
-        product.setStock(stock);
-
-        return mapToResponseDto(productRepository.save(product));
-    }
+   
 }
