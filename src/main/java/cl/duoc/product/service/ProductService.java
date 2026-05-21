@@ -4,13 +4,13 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.service;
+package cl.duoc.product.service;
 
-import com.duoc.product.dto.request.ProductRequestDto;
-import com.duoc.product.dto.response.ProductResponseDto;
-import com.duoc.product.exception.ResourceNotFoundException;
-import com.duoc.product.model.ProductModel;
-import com.duoc.product.repository.ProductRepository;
+import cl.duoc.product.dto.request.ProductRequestDto;
+import cl.duoc.product.dto.response.ProductResponseDto;
+import cl.duoc.product.exception.ResourceNotFoundException;
+import cl.duoc.product.model.ProductModel;
+import cl.duoc.product.repository.ProductRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

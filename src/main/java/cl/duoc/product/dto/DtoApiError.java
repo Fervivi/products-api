@@ -4,7 +4,7 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.dto;
+package cl.duoc.product.dto;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

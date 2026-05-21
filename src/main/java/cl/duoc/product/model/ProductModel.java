@@ -4,7 +4,7 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.model;
+package cl.duoc.product.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

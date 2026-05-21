@@ -4,9 +4,9 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.exception;
+package cl.duoc.product.exception;
 
-import com.duoc.product.dto.DtoApiError;
+import cl.duoc.product.dto.DtoApiError;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.HashMap;

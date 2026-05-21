@@ -4,7 +4,7 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.security;
+package cl.duoc.product.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

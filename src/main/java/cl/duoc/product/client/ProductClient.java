@@ -4,10 +4,10 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.client;
+package cl.duoc.product.client;
 
-import com.duoc.product.dto.response.ProductResponseDto;
-import com.duoc.product.exception.ResourceNotFoundException;
+import cl.duoc.product.dto.response.ProductResponseDto;
+import cl.duoc.product.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

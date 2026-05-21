@@ -4,9 +4,9 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.repository;
+package cl.duoc.product.repository;
 
-import com.duoc.product.model.ProductModel;
+import cl.duoc.product.model.ProductModel;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

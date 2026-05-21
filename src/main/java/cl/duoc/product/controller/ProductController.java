@@ -4,11 +4,11 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.controller;
+package cl.duoc.product.controller;
 
-import com.duoc.product.dto.request.ProductRequestDto;
-import com.duoc.product.dto.response.ProductResponseDto;
-import com.duoc.product.service.ProductService;
+import cl.duoc.product.dto.request.ProductRequestDto;
+import cl.duoc.product.dto.response.ProductResponseDto;
+import cl.duoc.product.service.ProductService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

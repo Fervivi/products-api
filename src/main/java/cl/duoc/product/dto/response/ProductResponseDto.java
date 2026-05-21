@@ -4,7 +4,7 @@
  * Rodrigo Callealta
  * Fernando Villalobos
  */
-package com.duoc.product.dto.response;
+package cl.duoc.product.dto.response;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
