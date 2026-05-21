@@ -91,8 +91,6 @@
 			<artifactId>spring-boot-starter-flyway-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security-test</artifactId> 
-			<scope>test</scope> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation-test</artifactId>
@@ -112,11 +110,17 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>4.5.0</version>
+			<version>4.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>7.4</version>
 		</dependency>
 	</dependencies>
 
 	<build>
+		<finalName>app-microservice</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -219,6 +223,9 @@
 								<include>pom.xml</include>
 								<include>**/*.xml</include>
 							</includes>
+							<excludes>
+								<exclude>**/logback-spring.xml</exclude>
+							</excludes>
 							<eclipseWtp>
 								<type>XML</type>
 							</eclipseWtp>
