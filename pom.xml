@@ -204,6 +204,9 @@
 							<includes>
 								<include>**/*.md</include>
 							</includes>
+							<excludes>
+								<exclude>**/logback-spring.xml</exclude>
+							</excludes>
 							<trimTrailingWhitespace />
 							<endWithNewline />
 						</format>
