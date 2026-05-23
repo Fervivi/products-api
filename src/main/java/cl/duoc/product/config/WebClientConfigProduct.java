@@ -16,7 +16,7 @@ public class WebClientConfigProduct {
     @Bean
     public WebClient WebClientProduct() {
         return WebClient.builder()
-                .baseUrl("http://localhost:8082")
+                .baseUrl("http://localhost:8084")
                 .defaultHeader("Content-Type", "application/json")
                 .build();
     }
