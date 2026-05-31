@@ -1,75 +1,153 @@
+# Product Microservice (product-api v1)
 
-3. Invoice Microservice
-Descripción
+## Descripción
 
-El microservicio de facturas se encarga de generar y administrar facturas dentro del sistema.
-Su responsabilidad principal es registrar la información de una factura, incluyendo datos del emisor, receptor, folio, fecha y montos.
+Microservicio encargado de administrar el catálogo de productos del sistema.
 
-Funcionalidades principales
-Crear facturas.
-Generar folio automático.
-Consultar facturas.
-Buscar factura por folio.
-Contar facturas registradas.
-Anular facturas.
-Manejar datos del emisor y receptor.
-Registrar montos netos, IVA y total.
-Proteger endpoints mediante JWT.
-Endpoints principales
-POST /api/v1/invoices
+Permite crear, consultar, actualizar y desactivar productos.
 
-Crea una nueva factura.
+---
 
-Ejemplo de body:
+## Tech Stack
 
-{
-  "fecha": "2026-05-31",
-  "razonSocialReceptor": "Cliente Ejemplo SPA",
-  "giroReceptor": "Comercio",
-  "direccionReceptor": "Av. Siempre Viva 123",
-  "rutReceptor": "11111111-1",
-  "razonSocialEmisor": "Empresa Emisora SPA",
-  "giroEmisor": "Venta de productos",
-  "direccionEmisor": "Av. Principal 456",
-  "rutEmisor": "22222222-2"
-}
-GET /api/v1/invoices
+* Java 25
+* Spring Boot 4.0.6
+* Spring Security
+* JWT
+* Spring Data JPA
+* MySQL
+* Flyway
+* Docker
+* Maven
 
-Lista todas las facturas.
+---
 
-GET /api/v1/invoices/{folio}
+## Funcionalidades
 
-Busca una factura por folio.
+* Crear productos
+* Listar productos
+* Buscar productos por ID
+* Buscar productos por categoría
+* Listar productos activos
+* Actualizar productos
+* Desactivar productos
 
-GET /api/v1/invoices/count
+---
 
-Obtiene la cantidad total de facturas.
+## Modelo de Datos
 
-PUT /api/v1/invoices/{folio}/anular
+```mermaid
+erDiagram
+    PRODUCTS {
+        BIGINT id PK
+        VARCHAR nombre
+        VARCHAR descripcion
+        DECIMAL precio
+        INTEGER stock
+        VARCHAR categoria
+        BOOLEAN activo
+    }
+```
 
-Anula una factura existente.
+---
 
-Autenticación
+## API / Endpoints
 
-Los microservicios utilizan autenticación mediante JWT.
-Para consumir endpoints protegidos se debe enviar el token en el header:
+Base URL:
 
-Authorization: Bearer TU_TOKEN
+```txt
+/api/v1/products
+```
 
-Ejemplo en Postman:
+| Acción               | Método | Endpoint                                |
+| -------------------- | ------ | --------------------------------------- |
+| Crear producto       | POST   | `/api/v1/products`                      |
+| Listar productos     | GET    | `/api/v1/products`                      |
+| Listar activos       | GET    | `/api/v1/products/active`               |
+| Buscar por ID        | GET    | `/api/v1/products/{id}`                 |
+| Buscar por categoría | GET    | `/api/v1/products/category/{categoria}` |
+| Actualizar producto  | PUT    | `/api/v1/products/{id}`                 |
+| Desactivar producto  | DELETE | `/api/v1/products/{id}`                 |
 
-Key	Value
-Authorization	Bearer eyJhbGciOiJIUzI1NiJ9...
+---
 
-El token se obtiene desde el microservicio de autenticación mediante login.
+## Ejemplo de Request
 
-Ejemplo:
-
-POST /api/v1/auth/login
+```http
+POST http://localhost:8005/api/v1/products
+```
 
 Body:
 
+```json
 {
-  "usuario": "test",
-  "password": "password"
+  "nombre": "Collar para perro",
+  "descripcion": "Collar ajustable color rojo",
+  "precio": 5990,
+  "stock": 20,
+  "categoria": "Accesorios"
 }
+```
+
+---
+
+## Ejemplo de Response
+
+```json
+{
+  "id": 1,
+  "nombre": "Collar para perro",
+  "descripcion": "Collar ajustable color rojo",
+  "precio": 5990,
+  "stock": 20,
+  "categoria": "Accesorios",
+  "activo": true
+}
+```
+
+---
+
+## Variables de entorno
+
+```env
+SPRING_ENV=dev
+SPRING_APP_NAME=Product
+
+HOST_PORT=8005
+
+MYSQL_DATABASE=db_products
+
+SPRING_JWT_SECRET=secret-key
+SPRING_JWT_ISSUER=login-service
+```
+
+---
+
+## Ejecución
+
+```bash
+docker compose up -d
+mvn spring-boot:run
+```
+
+---
+
+## Seguridad
+
+Los endpoints protegidos utilizan JWT.
+
+Header:
+
+```txt
+Authorization: Bearer TOKEN
+```
+
+---
+
+## Equipo
+
+* Eduardo Bray
+* Rodrigo Callealta
+* Fernando Villalobos
+
+> DuocUC — FullStack 1 © 2026
