@@ -27,6 +27,7 @@ public class ProductService {
 
         response.setId(product.getId());
         response.setNombre(product.getNombre());
+        response.setSku(product.getSku());
         response.setDescripcion(product.getDescripcion());
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
@@ -41,6 +42,7 @@ public class ProductService {
         ProductModel product = new ProductModel();
 
         product.setNombre(request.getNombre());
+        product.setSku(request.getSku());
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
@@ -82,6 +84,7 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
         product.setNombre(request.getNombre());
+        product.setSku(request.getSku());
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());

@@ -28,6 +28,9 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true, length = 64)
+    private String sku;
+
     @Column(nullable = false)
     private String nombre;
 

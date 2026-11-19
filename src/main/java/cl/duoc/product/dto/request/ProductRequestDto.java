@@ -26,6 +26,10 @@ public class ProductRequestDto {
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
+    @Schema(description = "Codigo SKU del producto", example = "PD-101")
+    @NotBlank(message = "El SKU es obligatorio")
+    private String sku;
+
     @Schema(description = "Descripcion comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
     @NotBlank(message = "La descripcion es obligatoria")
     private String descripcion;

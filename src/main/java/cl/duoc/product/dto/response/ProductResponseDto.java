@@ -24,6 +24,9 @@ public class ProductResponseDto {
     @Schema(description = "Nombre del producto", example = "Notebook Lenovo IdeaPad")
     private String nombre;
 
+    @Schema(description = "Codigo SKU del producto", example = "PD-101")
+    private String sku;
+
     @Schema(description = "Descripcion comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
     private String descripcion;
 
