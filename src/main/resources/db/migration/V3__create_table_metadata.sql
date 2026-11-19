@@ -14,7 +14,8 @@ CREATE TABLE columns_metadata (
     is_hidden BOOLEAN NOT NULL DEFAULT FALSE,
     highlight BOOLEAN NOT NULL DEFAULT FALSE,
     is_state BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT uk_columns_metadata_table_api_key UNIQUE (table_name, api_key)
+    CONSTRAINT uk_columns_metadata_table_api_key UNIQUE (table_name, api_key),
+    CONSTRAINT uk_columns_metadata_table_column UNIQUE (table_name, column_name)
 );
 
 INSERT INTO columns_metadata (
@@ -40,5 +41,5 @@ INSERT INTO columns_metadata (
 ('productos', 'categoria', 'categoria', 'Categoría', 'string', 5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
 ('productos', 'precio', 'precio', 'Precio', 'money', 6, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
 ('productos', 'stock', 'stock', 'Stock', 'number', 7, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'activo', 'estado', 'Estado', 'string', 8, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE),
+('productos', 'activo', 'estado', 'Estado', 'string', 8, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE)
 ;
