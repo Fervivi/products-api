@@ -47,4 +47,8 @@ public class ProductRequestDto {
     @Schema(description = "Categoria a la que pertenece el producto", example = "tecnologia")
     @NotBlank(message = "La categoria es obligatoria")
     private String categoria;
+
+    @Schema(description = "Estado actual del producto", example = "activo")
+    @NotBlank(message = "El estado es obligatorio")
+    private String estado;
 }

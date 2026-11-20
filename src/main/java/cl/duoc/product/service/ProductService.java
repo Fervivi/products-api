@@ -9,7 +9,9 @@ package cl.duoc.product.service;
 import cl.duoc.product.dto.request.ProductRequestDto;
 import cl.duoc.product.dto.response.ProductResponseDto;
 import cl.duoc.product.exception.ResourceNotFoundException;
+import cl.duoc.product.model.EstadoProducto;
 import cl.duoc.product.model.ProductModel;
+import cl.duoc.product.repository.EstadoProductoRepository;
 import cl.duoc.product.repository.ProductRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final EstadoProductoRepository estadoProductoRepository;
 
     public ProductResponseDto mapToResponseDto(ProductModel product) {
 
@@ -32,6 +35,7 @@ public class ProductService {
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
         response.setCategoria(product.getCategoria());
+        response.setEstado(product.getEstado().getNombre());
         response.setActivo(product.getActivo());
 
         return response;
@@ -47,6 +51,7 @@ public class ProductService {
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(request.getCategoria());
+        product.setEstado(getEstado(request.getEstado()));
         product.setActivo(true);
 
         ProductModel savedProduct = productRepository.save(product);
@@ -89,6 +94,7 @@ public class ProductService {
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(request.getCategoria());
+        product.setEstado(getEstado(request.getEstado()));
 
         return mapToResponseDto(productRepository.save(product));
     }
@@ -101,5 +107,11 @@ public class ProductService {
         product.setActivo(false);
 
         return mapToResponseDto(productRepository.save(product));
+    }
+
+    private EstadoProducto getEstado(String nombre) {
+        return estadoProductoRepository
+                .findByNombre(nombre)
+                .orElseThrow(() -> new ResourceNotFoundException("Estado de producto no encontrado: " + nombre));
     }
 }
