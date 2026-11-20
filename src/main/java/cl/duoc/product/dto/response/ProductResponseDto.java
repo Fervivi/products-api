@@ -6,6 +6,7 @@
  */
 package cl.duoc.product.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -39,8 +40,16 @@ public class ProductResponseDto {
     @Schema(description = "Categoría a la que pertenece el producto", example = "Alimentos para perros")
     private String categoria;
 
+    @Schema(description = "Identificador de la categoría del producto", example = "1")
+    @JsonProperty("id_categoria")
+    private Long idCategoria;
+
     @Schema(description = "Estado actual del producto", example = "Activo")
     private String estado;
+
+    @Schema(description = "Identificador del estado del producto", example = "1")
+    @JsonProperty("id_estado")
+    private Long idEstado;
 
     @Schema(description = "Indica si el producto está activo", example = "true")
     private Boolean activo;
