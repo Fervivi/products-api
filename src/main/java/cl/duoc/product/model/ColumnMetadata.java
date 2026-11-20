@@ -36,6 +36,9 @@ public class ColumnMetadata {
     @Column(name = "api_key", nullable = false, length = 64)
     private String apiKey;
 
+    @Column(name = "value_key", length = 64)
+    private String valueKey;
+
     @Column(nullable = false, length = 100)
     private String label;
 

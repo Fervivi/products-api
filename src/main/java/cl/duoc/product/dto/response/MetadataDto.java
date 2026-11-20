@@ -80,6 +80,10 @@ public class MetadataDto {
     @AllArgsConstructor
     public static class ColumnMetadata {
         private String key;
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        private String valueKey;
+
         private String label;
         private String type;
         private Boolean showInCreate;

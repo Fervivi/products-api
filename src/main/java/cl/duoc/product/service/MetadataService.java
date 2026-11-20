@@ -106,6 +106,7 @@ public class MetadataService {
         return columns.stream()
                 .map(column -> new MetadataDto.ColumnMetadata(
                         column.getApiKey(),
+                        column.getValueKey(),
                         column.getLabel(),
                         column.getType(),
                         column.isShowInCreate(),
