@@ -26,12 +26,12 @@ public class ProductRequestDto {
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @Schema(description = "Codigo SKU del producto", example = "PD-101")
+    @Schema(description = "Código SKU del producto", example = "PD-101")
     @NotBlank(message = "El SKU es obligatorio")
     private String sku;
 
-    @Schema(description = "Descripcion comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
-    @NotBlank(message = "La descripcion es obligatoria")
+    @Schema(description = "Descripción comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
+    @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
     @Schema(description = "Precio unitario del producto", example = "549990")
@@ -44,9 +44,9 @@ public class ProductRequestDto {
     @PositiveOrZero(message = "El stock no puede ser negativo")
     private Integer stock;
 
-    @Schema(description = "Categoria a la que pertenece el producto", example = "tecnologia")
-    @NotBlank(message = "La categoria es obligatoria")
-    private String categoria;
+    @Schema(description = "Identificador de la categoría del producto", example = "1")
+    @NotNull(message = "La categoría es obligatoria")
+    private Long categoria;
 
     @Schema(description = "Estado actual del producto", example = "activo")
     @NotBlank(message = "El estado es obligatorio")

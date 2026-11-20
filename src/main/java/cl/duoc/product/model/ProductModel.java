@@ -45,8 +45,9 @@ public class ProductModel {
     @Column(nullable = false)
     private Integer stock;
 
-    @Column(nullable = false)
-    private String categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
     @Column(nullable = false)
     private Boolean activo = true;

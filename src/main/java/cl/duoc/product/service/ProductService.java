@@ -9,8 +9,10 @@ package cl.duoc.product.service;
 import cl.duoc.product.dto.request.ProductRequestDto;
 import cl.duoc.product.dto.response.ProductResponseDto;
 import cl.duoc.product.exception.ResourceNotFoundException;
+import cl.duoc.product.model.Categoria;
 import cl.duoc.product.model.EstadoProducto;
 import cl.duoc.product.model.ProductModel;
+import cl.duoc.product.repository.CategoriaRepository;
 import cl.duoc.product.repository.EstadoProductoRepository;
 import cl.duoc.product.repository.ProductRepository;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final EstadoProductoRepository estadoProductoRepository;
+    private final CategoriaRepository categoriaRepository;
 
     public ProductResponseDto mapToResponseDto(ProductModel product) {
 
@@ -34,7 +37,7 @@ public class ProductService {
         response.setDescripcion(product.getDescripcion());
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
-        response.setCategoria(product.getCategoria());
+        response.setCategoria(product.getCategoria().getNombreCategoria());
         response.setEstado(product.getEstado().getLabel());
         response.setActivo(product.getActivo());
 
@@ -50,7 +53,7 @@ public class ProductService {
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
-        product.setCategoria(request.getCategoria());
+        product.setCategoria(getCategoria(request.getCategoria()));
         product.setEstado(getEstado(request.getEstado()));
         product.setActivo(true);
 
@@ -70,7 +73,7 @@ public class ProductService {
     }
 
     public List<ProductResponseDto> getProductsByCategoria(String categoria) {
-        return productRepository.findByCategoriaAndActivoTrue(categoria).stream()
+        return productRepository.findByCategoriaNombreCategoriaAndActivoTrue(categoria).stream()
                 .map(this::mapToResponseDto)
                 .toList();
     }
@@ -93,7 +96,7 @@ public class ProductService {
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
-        product.setCategoria(request.getCategoria());
+        product.setCategoria(getCategoria(request.getCategoria()));
         product.setEstado(getEstado(request.getEstado()));
 
         return mapToResponseDto(productRepository.save(product));
@@ -107,6 +110,12 @@ public class ProductService {
         product.setActivo(false);
 
         return mapToResponseDto(productRepository.save(product));
+    }
+
+    private Categoria getCategoria(Long id) {
+        return categoriaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con id: " + id));
     }
 
     private EstadoProducto getEstado(String nombre) {
