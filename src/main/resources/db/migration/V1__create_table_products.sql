@@ -14,5 +14,7 @@ CREATE TABLE products (
     stock INT NOT NULL,
     categoria VARCHAR(255) NOT NULL,
     activo BIT NOT NULL,
-    CONSTRAINT uk_products_sku UNIQUE (sku)
+    estado_id BIGINT NOT NULL,
+    CONSTRAINT uk_products_sku UNIQUE (sku),
+    CONSTRAINT fk_products_estado FOREIGN KEY (estado_id) REFERENCES estados_producto(id)
 );
