@@ -76,12 +76,12 @@ public class ProductController {
 
     @GetMapping("/category/{categoria}")
     @Operation(
-            summary = "Buscar productos por categoria",
-            description = "Obtiene los productos asociados a una categoria.",
+            summary = "Buscar productos por categoría",
+            description = "Obtiene los productos asociados a una categoría.",
             responses = {
                 @ApiResponse(
                         responseCode = "200",
-                        description = "Productos encontrados para la categoria",
+                        description = "Productos encontrados para la categoría",
                         content =
                                 @Content(
                                         array =
@@ -89,14 +89,15 @@ public class ProductController {
                                                         schema = @Schema(implementation = ProductResponseDto.class))))
             })
     public ResponseEntity<List<ProductResponseDto>> getProductsByCategoria(
-            @Parameter(description = "Categoria del producto", example = "tecnologia") @PathVariable String categoria) {
+            @Parameter(description = "Categoría del producto", example = "Alimentos para perros") @PathVariable
+                    String categoria) {
         return ResponseEntity.ok(productService.getProductsByCategoria(categoria));
     }
 
     @GetMapping("/{id}")
     @Operation(
             summary = "Obtener producto por ID",
-            description = "Obtiene el detalle de un producto especifico.",
+            description = "Obtiene el detalle de un producto específico.",
             responses = {
                 @ApiResponse(
                         responseCode = "200",

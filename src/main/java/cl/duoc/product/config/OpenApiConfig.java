@@ -25,7 +25,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Products API")
                         .version("1.0.0")
-                        .description("Documentacion de endpoints para la administracion de productos."))
+                        .description("Documentación de endpoints para la administración de productos."))
                 .addSecurityItem(new SecurityRequirement().addList(BEARER_AUTH))
                 .components(new Components()
                         .addSecuritySchemes(

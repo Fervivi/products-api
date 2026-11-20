@@ -20,21 +20,21 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Detalle de error retornado por la API")
 public class DtoApiError {
 
-    @Schema(description = "Fecha en que ocurrio el error", example = "2026-06-16")
+    @Schema(description = "Fecha en que ocurrió el error", example = "2026-06-16")
     private LocalDate timestamp;
 
-    @Schema(description = "Codigo HTTP del error", example = "404")
+    @Schema(description = "Código HTTP del error", example = "404")
     private int status;
 
-    @Schema(description = "Descripcion del estado HTTP", example = "Not Found")
+    @Schema(description = "Descripción del estado HTTP", example = "Not Found")
     private String error;
 
-    @Schema(description = "Mensaje especifico del error", example = "Producto no encontrado")
+    @Schema(description = "Mensaje específico del error", example = "Producto no encontrado")
     private String message;
 
-    @Schema(description = "Ruta donde ocurrio el error", example = "/api/v1/products/99")
+    @Schema(description = "Ruta donde ocurrió el error", example = "/api/v1/products/99")
     private String path;
 
-    @Schema(description = "Clase de excepcion asociada", example = "ResourceNotFoundException")
+    @Schema(description = "Clase de excepción asociada", example = "ResourceNotFoundException")
     private String claseException;
 }
