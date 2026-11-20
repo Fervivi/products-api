@@ -35,7 +35,7 @@ public class ProductService {
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
         response.setCategoria(product.getCategoria());
-        response.setEstado(product.getEstado().getNombre());
+        response.setEstado(product.getEstado().getLabel());
         response.setActivo(product.getActivo());
 
         return response;
