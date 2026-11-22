@@ -37,8 +37,8 @@ INSERT INTO columns_metadata (
     is_state
 ) VALUES
 ('productos', 'id', 'id', NULL, 'ID', 'string', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE),
-('productos', 'nombre', 'nombre', NULL, 'Producto', 'string', 2, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
-('productos', 'descripcion', 'descripcion', NULL, 'Descripción', 'string', 4, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
+('productos', 'nombre', 'nombre', NULL, 'Producto', 'string', 2, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'descripcion', 'descripcion', NULL, 'Descripción', 'text', 4, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
 ('productos', 'sku', 'sku', NULL, 'SKU', 'string', 3, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
 ('productos', 'categoria_id', 'categoria', 'id_categoria', 'Categoría', 'string', 5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
 ('productos', 'precio', 'precio', NULL, 'Precio', 'money', 6, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
