@@ -11,27 +11,27 @@ categorías y entregar metadata para el mantenedor del frontend.
 
 ## Tech Stack
 
-* Java 25
-* Spring Boot 4.0.6
-* Spring Security
-* JWT
-* Spring Data JPA
-* MySQL
-* Flyway
-* Docker
-* Maven
-* Eureka Client
+- Java 25
+- Spring Boot 4.0.6
+- Spring Security
+- JWT
+- Spring Data JPA
+- MySQL
+- Flyway
+- Docker
+- Maven
+- Eureka Client
 
 ---
 
 ## Funcionalidades
 
-* Crear, listar, actualizar y desactivar productos
-* Buscar productos por ID o por categoría
-* Listar productos activos
-* Administrar categorías
-* Entregar metadata de columnas, estados y formularios
-* Mantener estados y categorías como entidades relacionadas
+- Crear, listar, actualizar y desactivar productos
+- Buscar productos por ID o por categoría
+- Listar productos activos
+- Administrar categorías
+- Entregar metadata de columnas, estados y formularios
+- Mantener estados y categorías como entidades relacionadas
 
 ---
 
@@ -88,7 +88,6 @@ erDiagram
         VARCHAR table_name
         VARCHAR column_name
         VARCHAR api_key
-        VARCHAR value_key
         VARCHAR label
         VARCHAR type
         INTEGER sort_order
@@ -116,20 +115,20 @@ Base URL:
 /api/v1/products
 ```
 
-| Acción                  | Método | Endpoint                                |
-| ----------------------- | ------ | --------------------------------------- |
-| Crear producto          | POST   | `/api/v1/products`                      |
-| Listar productos        | GET    | `/api/v1/products`                      |
-| Listar activos          | GET    | `/api/v1/products/active`               |
-| Buscar por ID           | GET    | `/api/v1/products/{id}`                 |
-| Buscar por categoría    | GET    | `/api/v1/products/category/{categoria}` |
-| Actualizar producto     | PUT    | `/api/v1/products/{id}`                 |
-| Desactivar producto     | DELETE | `/api/v1/products/{id}`                 |
-| Obtener metadata        | GET    | `/api/v1/products/metadata`             |
-| Listar categorías       | GET    | `/api/v1/products/categories`           |
-| Crear categoría         | POST   | `/api/v1/products/categories`           |
-| Actualizar categoría    | PUT    | `/api/v1/products/categories/{id}`      |
-| Eliminar categoría      | DELETE | `/api/v1/products/categories/{id}`      |
+| Acción               | Método | Endpoint                                |
+| -------------------- | ------ | --------------------------------------- |
+| Crear producto       | POST   | `/api/v1/products`                      |
+| Listar productos     | GET    | `/api/v1/products`                      |
+| Listar activos       | GET    | `/api/v1/products/active`               |
+| Buscar por ID        | GET    | `/api/v1/products/{id}`                 |
+| Buscar por categoría | GET    | `/api/v1/products/category/{categoria}` |
+| Actualizar producto  | PUT    | `/api/v1/products/{id}`                 |
+| Desactivar producto  | DELETE | `/api/v1/products/{id}`                 |
+| Obtener metadata     | GET    | `/api/v1/products/metadata`             |
+| Listar categorías    | GET    | `/api/v1/products/categories`           |
+| Crear categoría      | POST   | `/api/v1/products/categories`           |
+| Actualizar categoría | PUT    | `/api/v1/products/categories/{id}`      |
+| Eliminar categoría   | DELETE | `/api/v1/products/categories/{id}`      |
 
 `/category/{categoria}` recibe el valor interno `nombre_categoria`, por ejemplo
 `Alimentos para perros`.
@@ -179,33 +178,6 @@ obligatorios.
   "activo": true
 }
 ```
-
----
-
-## Metadata del mantenedor
-
-`GET /api/v1/products/metadata` entrega la configuración usada por el frontend
-para construir filtros, columnas y formularios.
-
-Las columnas de categoría y estado incluyen `valueKey`:
-
-```json
-[
-  {
-    "key": "categoria",
-    "valueKey": "id_categoria",
-    "label": "Categoría"
-  },
-  {
-    "key": "estado",
-    "valueKey": "id_estado",
-    "label": "Estado"
-  }
-]
-```
-
-El frontend debe usar `valueKey` para obtener el valor inicial del formulario.
-Al guardar, el request mantiene `categoria` como ID y `estado` como clave.
 
 ---
 
@@ -294,8 +266,8 @@ pública propia en el API Gateway. El Gateway debe exponer la ruta del manager.
 
 ## Equipo
 
-* Eduardo Bray
-* Rodrigo Callealta
-* Fernando Villalobos
+- Eduardo Bray
+- Rodrigo Callealta
+- Fernando Villalobos
 
 > DuocUC — FullStack 1 © 2026

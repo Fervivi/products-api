@@ -3,7 +3,6 @@ CREATE TABLE columns_metadata (
     table_name VARCHAR(64) NOT NULL,
     column_name VARCHAR(64) NOT NULL,
     api_key VARCHAR(64) NOT NULL,
-    value_key VARCHAR(64),
     label VARCHAR(100) NOT NULL,
     type VARCHAR(20) NOT NULL,
     sort_order INT NOT NULL DEFAULT 0,
@@ -23,7 +22,6 @@ INSERT INTO columns_metadata (
     table_name,
     column_name,
     api_key,
-    value_key,
     label,
     type,
     sort_order,
@@ -36,12 +34,12 @@ INSERT INTO columns_metadata (
     highlight,
     is_state
 ) VALUES
-('productos', 'id', 'id', NULL, 'ID', 'string', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE),
-('productos', 'nombre', 'nombre', NULL, 'Producto', 'string', 2, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'descripcion', 'descripcion', NULL, 'Descripción', 'text', 4, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
-('productos', 'sku', 'sku', NULL, 'SKU', 'string', 3, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'categoria_id', 'categoria', 'id_categoria', 'Categoría', 'string', 5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'precio', 'precio', NULL, 'Precio', 'money', 6, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'stock', 'stock', NULL, 'Stock', 'int', 7, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE),
-('productos', 'estado_id', 'estado', 'id_estado', 'Estado', 'string', 8, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE)
+('productos', 'id', 'id', 'ID', 'string', 1, FALSE, FALSE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE),
+('productos', 'nombre', 'nombre', 'Producto', 'string', 2, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'descripcion', 'descripcion', 'Descripción', 'text', 4, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE),
+('productos', 'sku', 'sku', 'SKU', 'string', 3, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'categoria_id', 'categoria', 'Categoría', 'string', 5, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'precio', 'precio', 'Precio', 'money', 6, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'stock', 'stock', 'Stock', 'int', 7, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE),
+('productos', 'estado_id', 'estado', 'Estado', 'string', 8, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE)
 ;
