@@ -41,11 +41,9 @@ public class ProductResponseDto {
     private String categoria;
 
     @Schema(description = "Identificador de la categoría del producto", example = "1")
-    @JsonProperty("categoria_id")
     private Long categoriaId;
 
     @Schema(description = "Identificador del estado del producto", example = "1")
-    @JsonProperty("estado_id")
     private Long estadoId;
 
     @Schema(description = "Indica si el producto está activo", example = "true")
