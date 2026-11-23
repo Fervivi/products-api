@@ -36,7 +36,7 @@ INSERT INTO entities_metadata (
     'producto',
     'Producto',
     'Productos',
-    'categoria',
+    'categoriaId',
     'Categoría',
     'Nueva Categoría',
     JSON_ARRAY('🐾', '🐕', '🐈', '🐦', '🐟', '🐹', '🦴', '🥣', '🧸', '🧶', '🛏️', '🏠', '🦮', '🎒', '🩺', '✂️', '👕', '📦'),

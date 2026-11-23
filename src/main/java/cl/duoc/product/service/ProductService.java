@@ -37,7 +37,6 @@ public class ProductService {
         response.setDescripcion(product.getDescripcion());
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
-        response.setCategoria(product.getCategoria().getNombreCategoria());
         response.setCategoriaId(product.getCategoria().getId());
         response.setEstadoId(product.getEstado().getId());
         response.setActivo(product.getActivo());
@@ -54,8 +53,8 @@ public class ProductService {
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
-        product.setCategoria(getCategoria(request.getCategoria()));
-        product.setEstado(getEstado(request.getEstado()));
+        product.setCategoria(getCategoria(request.getCategoriaId()));
+        product.setEstado(getEstado(request.getEstadoId()));
         product.setActivo(true);
 
         ProductModel savedProduct = productRepository.save(product);
@@ -97,8 +96,8 @@ public class ProductService {
         product.setDescripcion(request.getDescripcion());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
-        product.setCategoria(getCategoria(request.getCategoria()));
-        product.setEstado(getEstado(request.getEstado()));
+        product.setCategoria(getCategoria(request.getCategoriaId()));
+        product.setEstado(getEstado(request.getEstadoId()));
 
         return mapToResponseDto(productRepository.save(product));
     }

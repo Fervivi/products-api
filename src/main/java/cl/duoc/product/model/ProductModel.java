@@ -49,10 +49,11 @@ public class ProductModel {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
-    @Column(nullable = false)
-    private Boolean activo = true;
-
     @ManyToOne
     @JoinColumn(name = "estado_id", nullable = false)
     private EstadoProducto estado;
+
+    // Deprecated
+    @Column(nullable = false)
+    private Boolean activo = true;
 }
