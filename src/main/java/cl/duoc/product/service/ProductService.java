@@ -118,9 +118,9 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con id: " + id));
     }
 
-    private EstadoProducto getEstado(String nombre) {
+    private EstadoProducto getEstado(Long id) {
         return estadoProductoRepository
-                .findByNombre(nombre)
-                .orElseThrow(() -> new ResourceNotFoundException("Estado de producto no encontrado: " + nombre));
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Estado de producto no encontrado con id: " + id));
     }
 }
