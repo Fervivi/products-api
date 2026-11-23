@@ -43,5 +43,5 @@ INSERT INTO columns_metadata (
 ('productos', 'stock', 'stock', 'Stock', 'int', 7, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE),
 ('productos', 'estado_id', 'estadoId', 'Estado', 'string', 8, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE),
 ('productos', 'imagen', 'imagen', 'Imagen', 'string', 9, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE),
-('productos', 'caracteristicas', 'caracteristicas', 'Características', 'text', 10, TRUE, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE)
+('productos', 'caracteristicas', 'caracteristicas', 'Características', 'text', 10, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE)
 ;

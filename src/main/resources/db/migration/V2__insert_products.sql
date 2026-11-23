@@ -4,23 +4,116 @@ INSERT INTO estados_producto (nombre, label, descripcion) VALUES
 ('preparando', 'Preparando', 'Producto en preparación.');
 
 INSERT INTO categorias (nombre_categoria, nombre_mostrar, icon, descripcion) VALUES
-('Alimentos para perros', 'Alimentos para perros', '🐕', 'Alimento y nutrición para perros.'),
-('Alimentos para gatos', 'Alimentos para gatos', '🐈', 'Alimento y nutrición para gatos.'),
-('Higiene', 'Higiene', '✂️', 'Productos de higiene y aseo.'),
-('Cuidado e higiene', 'Cuidado e higiene', '🩺', 'Cuidado e higiene específica.'),
-('Accesorios', 'Accesorios', '🎒', 'Accesorios para mascotas.'),
-('Descanso', 'Descanso', '🛏️', 'Camas y descanso.'),
-('Snacks', 'Snacks', '🦴', 'Premios y snacks.'),
-('Juguetes', 'Juguetes', '🧸', 'Juguetes para mascotas.');
+('Alimentos', 'Alimentos', '🍖', 'Alimentos secos, húmedos y snacks para mascotas.'),
+('Juguetes', 'Juguetes', '🧸', 'Juguetes interactivos, de cuerda y peluches.'),
+('Accesorios y cuidado', 'Accesorios y cuidado', '🧼', 'Correas, camas y productos de higiene para mascotas.');
 
 INSERT INTO products (sku, nombre, descripcion, caracteristicas, imagen, precio, stock, categoria_id, activo, estado_id) VALUES
-('PD-101', 'Alimento Dog Chow Adulto 15kg', 'Alimento seco para perros adultos de raza mediana y grande', NULL, 'https://placehold.co/600x400?text=PD-101', 32990.00, 20, 1, 1, 1),
-('PG-201', 'Alimento Cat Chow Adulto 8kg', 'Alimento seco para gatos adultos con vitaminas y minerales', NULL, 'https://placehold.co/600x400?text=PG-201', 26990.00, 18, 2, 1, 1),
-('HG-601', 'Arena Sanitaria para Gatos 10kg', 'Arena sanitaria aglomerante con control de olores', NULL, 'https://placehold.co/600x400?text=HG-601', 9990.00, 35, 3, 1, 1),
-('HG-602', 'Shampoo para Perros 500ml', 'Shampoo suave para perros con aroma fresco', NULL, 'https://placehold.co/600x400?text=HG-602', 5990.00, 25, 4, 1, 1),
-('AC-701', 'Correa Ajustable para Perro', 'Correa resistente ajustable para paseo diario', NULL, 'https://placehold.co/600x400?text=AC-701', 7990.00, 30, 5, 1, 3),
-('DE-801', 'Cama para Mascota Mediana', 'Cama acolchada para perros y gatos medianos', NULL, 'https://placehold.co/600x400?text=DE-801', 24990.00, 12, 6, 1, 3),
-('SN-901', 'Snack Dental para Perros 500g', 'Premios dentales para ayudar al cuidado bucal del perro', NULL, 'https://placehold.co/600x400?text=SN-901', 8490.00, 22, 7, 1, 1),
-('AC-702', 'Comedero Doble Antideslizante', 'Comedero doble para agua y alimento con base antideslizante', NULL, 'https://placehold.co/600x400?text=AC-702', 6990.00, 28, 5, 1, 1),
-('JU-901', 'Juguete Mordedor de Goma', 'Juguete resistente para perros pequeños y medianos', NULL, 'https://placehold.co/600x400?text=JU-901', 4990.00, 40, 8, 1, 3),
-('PG-202', 'Alimento Húmedo para Gatos 85g', 'Sobre de alimento húmedo sabor salmón para gatos adultos', NULL, 'https://placehold.co/600x400?text=PG-202', 1290.00, 60, 2, 1, 1);
+(
+  'AL-101',
+  'Alimento Perro Adulto',
+  'Alimento seco balanceado para perros adultos, ideal para mantener energía y digestión saludable.',
+  'Formato seco para perros adultos. Ayuda a mantener energía diaria, digestión saludable y una alimentación equilibrada.',
+  '/img/comida-perro.png',
+  29990.00,
+  20,
+  1,
+  1,
+  1
+),
+(
+  'AL-102',
+  'Alimento Gato Adulto',
+  'Croquetas para gatos adultos con nutrientes esenciales para su pelaje y vitalidad.',
+  'Alimento seco para gatos adultos. Aporta nutrientes esenciales para el cuidado del pelaje y la energía diaria.',
+  '/img/comida-gato.png',
+  24990.00,
+  18,
+  1,
+  1,
+  1
+),
+(
+  'AL-103',
+  'Snacks Naturales',
+  'Premios saludables para perros y gatos, ideales para entrenamiento.',
+  'Snacks en porciones pequeñas, ideales como premio durante entrenamiento o como recompensa ocasional.',
+  '/img/snacks-naturales.png',
+  8990.00,
+  35,
+  1,
+  1,
+  1
+),
+(
+  'JU-201',
+  'Juguete de Cuerda',
+  'Cuerda resistente para entretener y ejercitar a tu perro.',
+  'Juguete resistente para morder y tirar. Recomendado para actividad física y juego supervisado.',
+  '/img/juguete-cuerda.png',
+  6990.00,
+  25,
+  2,
+  1,
+  1
+),
+(
+  'JU-202',
+  'Pelota Mordedora',
+  'Pelota texturizada para morder y estimular la actividad física.',
+  'Pelota con textura para morder. Favorece el juego activo y la entretención diaria.',
+  '/img/pelota.png',
+  5990.00,
+  30,
+  2,
+  1,
+  1
+),
+(
+  'JU-203',
+  'Ratón de Peluche',
+  'Juguete suave y liviano para estimular el instinto de juego de tu gato.',
+  'Peluche pequeño y liviano para gatos. Fácil de mover, perseguir y empujar durante el juego.',
+  '/img/juguete-raton.png',
+  4990.00,
+  40,
+  2,
+  1,
+  1
+),
+(
+  'AC-301',
+  'Collar con Correa',
+  'Set ajustable de collar y correa para paseos seguros y cómodos.',
+  'Collar ajustable con correa a juego. Incluye broche seguro y material resistente para paseos.',
+  '/img/collar-correa.png',
+  12990.00,
+  22,
+  3,
+  1,
+  1
+),
+(
+  'AC-302',
+  'Cama para Mascota',
+  'Cama acolchada para el descanso de perros o gatos pequeños.',
+  'Cama acolchada con borde suave. Recomendada para mascotas pequeñas que necesitan un espacio de descanso.',
+  '/img/cama-mascota.png',
+  34990.00,
+  12,
+  3,
+  1,
+  1
+),
+(
+  'AC-303',
+  'Shampoo Mascotas',
+  'Shampoo suave para mantener el pelaje limpio y con buen aroma.',
+  'Producto de higiene para mascotas. Ayuda a limpiar el pelaje y mantener una sensación fresca.',
+  '/img/shampoo.png',
+  7990.00,
+  28,
+  3,
+  1,
+  1
+);
