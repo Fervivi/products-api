@@ -36,7 +36,8 @@ public class ProductResponseDto {
     @Schema(description = "Cantidad disponible en inventario", example = "25")
     private Integer stock;
 
-    @Schema(description = "Categoría a la que pertenece el producto", example = "Alimentos para perros")
+    // Deprecated
+    @Schema(description = "(DEPRECATED) Categoría a la que pertenece el producto", example = "Alimentos para perros")
     private String categoria;
 
     @Schema(description = "Identificador de la categoría del producto", example = "1")

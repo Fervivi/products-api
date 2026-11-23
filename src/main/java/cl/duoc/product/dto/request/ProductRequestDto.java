@@ -45,10 +45,10 @@ public class ProductRequestDto {
     private Integer stock;
 
     @Schema(description = "Identificador de la categoría del producto", example = "1")
-    @NotNull(message = "La categoría es obligatoria")
+    @NotNull(message = "El id de la categoría es obligatoria")
     private Long categoriaId;
 
-    @Schema(description = "Estado actual del producto", example = "activo")
-    @NotBlank(message = "El estado es obligatorio")
-    private String estadoId;
+    @Schema(description = "Identificador del estado actual del producto", example = "1")
+    @NotNull(message = "El id del estado es obligatorio")
+    private Long estadoId;
 }
