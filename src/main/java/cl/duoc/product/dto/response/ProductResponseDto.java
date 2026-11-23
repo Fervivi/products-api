@@ -21,24 +21,26 @@ public class ProductResponseDto {
     @Schema(description = "Identificador único del producto", example = "1")
     private Long id;
 
-    @Schema(description = "Nombre del producto", example = "Notebook Lenovo IdeaPad")
+    @Schema(description = "Nombre del producto", example = "Alimento Dog Chow Adulto 15kg")
     private String nombre;
 
     @Schema(description = "Código SKU del producto", example = "PD-101")
     private String sku;
 
-    @Schema(description = "Descripción comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
+    @Schema(description = "Descripción comercial del producto", example = "Alimento seco para perros adultos de raza mediana y grande")
     private String descripcion;
 
-    @Schema(description = "Precio unitario del producto", example = "549990")
+    @Schema(description = "Características o especificaciones técnicas del producto", example = "Formato seco de 15 kg con proteínas de alta calidad, vitaminas y minerales para perros adultos de raza mediana y grande.")
+    private String caracteristicas;
+
+    @Schema(description = "URL de la imagen del producto", example = "https://placehold.co/600x400?text=PD-101")
+    private String imagen;
+
+    @Schema(description = "Precio unitario del producto", example = "32990.00")
     private BigDecimal precio;
 
-    @Schema(description = "Cantidad disponible en inventario", example = "25")
+    @Schema(description = "Cantidad disponible en inventario", example = "20")
     private Integer stock;
-
-    // Deprecated
-    @Schema(description = "(DEPRECATED) Categoría a la que pertenece el producto", example = "Alimentos para perros")
-    private String categoria;
 
     @Schema(description = "Identificador de la categoría del producto", example = "1")
     private Long categoriaId;
@@ -46,6 +48,11 @@ public class ProductResponseDto {
     @Schema(description = "Identificador del estado del producto", example = "1")
     private Long estadoId;
 
-    @Schema(description = "Indica si el producto está activo", example = "true")
+    @Deprecated
+    @Schema(description = "(DEPRECATED) Indica si el producto está activo", example = "true", deprecated = true)
     private Boolean activo;
+
+    @Deprecated
+    @Schema(description = "(DEPRECATED) Categoría a la que pertenece el producto", example = "Alimentos para perros", deprecated = true)
+    private String categoria;
 }

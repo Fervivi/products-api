@@ -36,8 +36,14 @@ public class ProductModel {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String descripcion;
+
+    @Column(columnDefinition = "TEXT")
+    private String caracteristicas;
+
+    @Column(nullable = false, length = 500)
+    private String imagen;
 
     @Column(nullable = false)
     private BigDecimal precio;

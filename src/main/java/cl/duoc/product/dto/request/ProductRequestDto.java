@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Datos necesarios para crear o actualizar un producto")
 public class ProductRequestDto {
 
-    @Schema(description = "Nombre del producto", example = "Notebook Lenovo IdeaPad")
+    @Schema(description = "Nombre del producto", example = "Alimento Dog Chow Adulto 15kg")
     @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
@@ -30,22 +30,30 @@ public class ProductRequestDto {
     @NotBlank(message = "El SKU es obligatorio")
     private String sku;
 
-    @Schema(description = "Descripción comercial del producto", example = "Notebook de 15 pulgadas con 16 GB RAM")
+    @Schema(description = "Descripción comercial del producto", example = "Alimento seco para perros adultos de raza mediana y grande")
     @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
 
-    @Schema(description = "Precio unitario del producto", example = "549990")
+    @Schema(description = "Características o especificaciones técnicas del producto", example = "Formato seco de 15 kg con proteínas de alta calidad, vitaminas y minerales para perros adultos de raza mediana y grande.")
+    @NotBlank(message = "El texto de características es obligatorio")
+    private String caracteristicas;
+
+    @Schema(description = "URL de la imagen del producto", example = "https://placehold.co/600x400?text=PD-101")
+    @NotBlank(message = "La imagen del producto es obligatoria")
+    private String imagen;
+
+    @Schema(description = "Precio unitario del producto", example = "32990.00")
     @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser mayor a 0")
     private BigDecimal precio;
 
-    @Schema(description = "Cantidad disponible en inventario", example = "25")
+    @Schema(description = "Cantidad disponible en inventario", example = "20")
     @NotNull(message = "El stock es obligatorio")
     @PositiveOrZero(message = "El stock no puede ser negativo")
     private Integer stock;
 
     @Schema(description = "Identificador de la categoría del producto", example = "1")
-    @NotNull(message = "El id de la categoría es obligatoria")
+    @NotNull(message = "El id de la categoría es obligatorio")
     private Long categoriaId;
 
     @Schema(description = "Identificador del estado actual del producto", example = "1")

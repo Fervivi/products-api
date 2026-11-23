@@ -36,5 +36,6 @@ public class Categoria {
     @Column(nullable = false, length = 32)
     private String icon;
 
+    @Column(length = 500)
     private String descripcion;
 }
