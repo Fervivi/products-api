@@ -35,6 +35,8 @@ public class ProductService {
         response.setNombre(product.getNombre());
         response.setSku(product.getSku());
         response.setDescripcion(product.getDescripcion());
+        response.setCaracteristicas(product.getCaracteristicas());
+        response.setImagen(product.getImagen());
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
         response.setCategoriaId(product.getCategoria().getId());
@@ -51,6 +53,8 @@ public class ProductService {
         product.setNombre(request.getNombre());
         product.setSku(request.getSku());
         product.setDescripcion(request.getDescripcion());
+        product.setCaracteristicas(request.getCaracteristicas());
+        product.setImagen(request.getImagen());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(getCategoria(request.getCategoriaId()));
@@ -94,6 +98,8 @@ public class ProductService {
         product.setNombre(request.getNombre());
         product.setSku(request.getSku());
         product.setDescripcion(request.getDescripcion());
+        product.setCaracteristicas(request.getCaracteristicas());
+        product.setImagen(request.getImagen());
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(getCategoria(request.getCategoriaId()));

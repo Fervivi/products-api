@@ -51,8 +51,4 @@ public class ProductResponseDto {
     @Deprecated
     @Schema(description = "(DEPRECATED) Indica si el producto está activo", example = "true", deprecated = true)
     private Boolean activo;
-
-    @Deprecated
-    @Schema(description = "(DEPRECATED) Categoría a la que pertenece el producto", example = "Alimentos para perros", deprecated = true)
-    private String categoria;
 }
