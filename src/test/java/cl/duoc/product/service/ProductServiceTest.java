@@ -49,71 +49,85 @@ class ProductServiceTest {
     private ProductService productService;
 
     private Categoria categoria;
-    private EstadoProducto estado;
+    private EstadoProducto estadoActivo;
+    private EstadoProducto estadoInactivo;
     private ProductModel product;
 
     @BeforeEach
     void setUp() {
-        categoria = new Categoria(1L, "alimentos", "Alimentos para perros", "🐕", "Alimentos balanceados");
-        estado = new EstadoProducto(1L, "activo", "Activo", "Disponible para la venta");
+        categoria = new Categoria(1L, "Alimentos", "Alimentos", "🍖", "Alimentos para mascotas");
+        estadoActivo = new EstadoProducto(1L, "activo", "Activo", "Disponible para la venta");
+        estadoInactivo = new EstadoProducto(2L, "inactivo", "Inactivo", "No disponible para la venta");
         product = new ProductModel(
                 1L,
-                "PD-101",
-                "Alimento premium",
-                "Alimento para perro adulto",
-                new BigDecimal("24990"),
+                "AL-101",
+                "Alimento Perro Adulto",
+                "Alimento seco balanceado",
+                "Formato seco para perros adultos",
+                "/img/comida-perro.png",
+                new BigDecimal("29990.00"),
                 20,
                 categoria,
-                true,
-                estado);
+                estadoActivo,
+                true);
     }
 
-    private ProductRequestDto createRequest() {
-        return createRequest(1L, "activo");
-    }
-
-    private ProductRequestDto createRequest(Long categoriaId, String estadoNombre) {
+    private ProductRequestDto createRequest(Long categoriaId, Long estadoId) {
         return new ProductRequestDto(
-                "Alimento premium",
-                "PD-101",
-                "Alimento para perro adulto",
-                new BigDecimal("24990"),
+                "Alimento Perro Adulto",
+                "AL-101",
+                "Alimento seco balanceado",
+                "Formato seco para perros adultos",
+                "/img/comida-perro.png",
+                new BigDecimal("29990.00"),
                 20,
                 categoriaId,
-                estadoNombre);
+                estadoId);
     }
 
     @Test
     void createProduct_shouldSaveActiveProductWithCategoryAndState() {
         when(categoriaRepository.findById(1L)).thenReturn(Optional.of(categoria));
-        when(estadoProductoRepository.findByNombre("activo")).thenReturn(Optional.of(estado));
-        when(productRepository.save(any(ProductModel.class))).thenAnswer(invocation -> {
-            ProductModel savedProduct = invocation.getArgument(0);
-            savedProduct.setId(1L);
-            return savedProduct;
+        when(estadoProductoRepository.findById(1L)).thenReturn(Optional.of(estadoActivo));
+        when(productRepository.save(any(ProductModel.class))).thenAnswer(inv -> {
+            ProductModel saved = inv.getArgument(0);
+            saved.setId(10L);
+            return saved;
         });
 
-        ProductResponseDto result = productService.createProduct(createRequest());
+        ProductResponseDto result = productService.createProduct(createRequest(1L, 1L));
 
         ArgumentCaptor<ProductModel> captor = ArgumentCaptor.forClass(ProductModel.class);
         verify(productRepository).save(captor.capture());
         ProductModel savedProduct = captor.getValue();
         assertThat(savedProduct.getActivo()).isTrue();
         assertThat(savedProduct.getCategoria()).isSameAs(categoria);
-        assertThat(savedProduct.getEstado()).isSameAs(estado);
-        assertThat(savedProduct.getSku()).isEqualTo("PD-101");
-        assertThat(result.getId()).isEqualTo(1L);
-        assertThat(result.getCategoria()).isEqualTo("alimentos");
-        assertThat(result.getIdCategoria()).isEqualTo(1L);
+        assertThat(savedProduct.getEstado()).isSameAs(estadoActivo);
+        assertThat(result.getId()).isEqualTo(10L);
+        assertThat(result.getImagen()).isEqualTo("/img/comida-perro.png");
+        assertThat(result.getCategoriaId()).isEqualTo(1L);
+        assertThat(result.getCategoria()).isEqualTo("Alimentos");
+        assertThat(result.getEstadoId()).isEqualTo(1L);
         assertThat(result.getEstado()).isEqualTo("Activo");
-        assertThat(result.getIdEstado()).isEqualTo(1L);
+    }
+
+    @Test
+    void createProduct_withNonActiveState_shouldNotBeActive() {
+        when(categoriaRepository.findById(1L)).thenReturn(Optional.of(categoria));
+        when(estadoProductoRepository.findById(2L)).thenReturn(Optional.of(estadoInactivo));
+        when(productRepository.save(any(ProductModel.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        ProductResponseDto result = productService.createProduct(createRequest(1L, 2L));
+
+        assertThat(result.getActivo()).isFalse();
+        assertThat(result.getEstado()).isEqualTo("Inactivo");
     }
 
     @Test
     void createProduct_shouldRejectUnknownCategory() {
         when(categoriaRepository.findById(99L)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> productService.createProduct(createRequest(99L, "activo")))
+        assertThatThrownBy(() -> productService.createProduct(createRequest(99L, 1L)))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Categoría no encontrada con id: 99");
         verify(productRepository, never()).save(any(ProductModel.class));
@@ -122,11 +136,11 @@ class ProductServiceTest {
     @Test
     void createProduct_shouldRejectUnknownState() {
         when(categoriaRepository.findById(1L)).thenReturn(Optional.of(categoria));
-        when(estadoProductoRepository.findByNombre("desconocido")).thenReturn(Optional.empty());
+        when(estadoProductoRepository.findById(99L)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> productService.createProduct(createRequest(1L, "desconocido")))
+        assertThatThrownBy(() -> productService.createProduct(createRequest(1L, 99L)))
                 .isInstanceOf(ResourceNotFoundException.class)
-                .hasMessage("Estado de producto no encontrado: desconocido");
+                .hasMessage("Estado de producto no encontrado con id: 99");
         verify(productRepository, never()).save(any(ProductModel.class));
     }
 
@@ -138,13 +152,10 @@ class ProductServiceTest {
 
         assertThat(result).hasSize(1);
         ProductResponseDto response = result.getFirst();
-        assertThat(response.getId()).isEqualTo(1L);
-        assertThat(response.getSku()).isEqualTo("PD-101");
-        assertThat(response.getCategoria()).isEqualTo("alimentos");
-        assertThat(response.getIdCategoria()).isEqualTo(1L);
+        assertThat(response.getNombre()).isEqualTo("Alimento Perro Adulto");
+        assertThat(response.getPrecio()).isEqualByComparingTo("29990");
+        assertThat(response.getCategoria()).isEqualTo("Alimentos");
         assertThat(response.getEstado()).isEqualTo("Activo");
-        assertThat(response.getIdEstado()).isEqualTo(1L);
-        verify(productRepository).findAll();
     }
 
     @Test
@@ -159,13 +170,13 @@ class ProductServiceTest {
 
     @Test
     void getProductsByCategoria_shouldReturnMatchingActiveProducts() {
-        when(productRepository.findByCategoriaNombreCategoriaAndActivoTrue("alimentos"))
+        when(productRepository.findByCategoriaNombreCategoriaAndActivoTrue("Alimentos"))
                 .thenReturn(List.of(product));
 
-        List<ProductResponseDto> result = productService.getProductsByCategoria("alimentos");
+        List<ProductResponseDto> result = productService.getProductsByCategoria("Alimentos");
 
-        assertThat(result).extracting(ProductResponseDto::getCategoria).containsExactly("alimentos");
-        verify(productRepository).findByCategoriaNombreCategoriaAndActivoTrue("alimentos");
+        assertThat(result).hasSize(1);
+        verify(productRepository).findByCategoriaNombreCategoriaAndActivoTrue("Alimentos");
     }
 
     @Test
@@ -175,8 +186,8 @@ class ProductServiceTest {
         ProductResponseDto result = productService.getProductById(1L);
 
         assertThat(result.getId()).isEqualTo(1L);
-        assertThat(result.getPrecio()).isEqualByComparingTo("24990");
-        assertThat(result.getIdEstado()).isEqualTo(1L);
+        assertThat(result.getSku()).isEqualTo("AL-101");
+        assertThat(result.getCaracteristicas()).isEqualTo("Formato seco para perros adultos");
     }
 
     @Test
@@ -189,25 +200,32 @@ class ProductServiceTest {
     }
 
     @Test
-    void updateProduct_shouldModifyExistingProduct() {
-        Categoria nuevaCategoria = new Categoria(2L, "juguetes", "Juguetes", "🧸", "Juguetes para mascotas");
-        EstadoProducto nuevoEstado = new EstadoProducto(2L, "inactivo", "Inactivo", "No disponible");
+    void updateProduct_shouldModifyProductAndSyncActiveFlagWithState() {
+        Categoria nuevaCategoria = new Categoria(2L, "Juguetes", "Juguetes", "🧸", "Juguetes para mascotas");
         ProductRequestDto request = new ProductRequestDto(
-                "Alimento actualizado", "PD-101", "Nueva descripción", new BigDecimal("27990"), 15, 2L, "inactivo");
+                "Alimento actualizado",
+                "AL-101",
+                "Nueva descripción",
+                "Nuevas características",
+                "/img/comida-perro.png",
+                new BigDecimal("27990"),
+                15,
+                2L,
+                2L);
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
         when(categoriaRepository.findById(2L)).thenReturn(Optional.of(nuevaCategoria));
-        when(estadoProductoRepository.findByNombre("inactivo")).thenReturn(Optional.of(nuevoEstado));
+        when(estadoProductoRepository.findById(2L)).thenReturn(Optional.of(estadoInactivo));
         when(productRepository.save(product)).thenReturn(product);
 
         ProductResponseDto result = productService.updateProduct(1L, request);
 
         assertThat(result.getNombre()).isEqualTo("Alimento actualizado");
         assertThat(result.getStock()).isEqualTo(15);
-        assertThat(result.getCategoria()).isEqualTo("juguetes");
-        assertThat(result.getIdCategoria()).isEqualTo(2L);
+        assertThat(result.getCategoriaId()).isEqualTo(2L);
+        assertThat(result.getCategoria()).isEqualTo("Juguetes");
+        assertThat(result.getEstadoId()).isEqualTo(2L);
         assertThat(result.getEstado()).isEqualTo("Inactivo");
-        assertThat(result.getIdEstado()).isEqualTo(2L);
-        assertThat(result.getActivo()).isTrue();
+        assertThat(result.getActivo()).isFalse();
         verify(productRepository).save(product);
     }
 
@@ -215,21 +233,34 @@ class ProductServiceTest {
     void updateProduct_shouldNotSaveWhenProductDoesNotExist() {
         when(productRepository.findById(99L)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> productService.updateProduct(99L, createRequest()))
+        assertThatThrownBy(() -> productService.updateProduct(99L, createRequest(1L, 1L)))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Producto no encontrado con id: 99");
         verify(productRepository, never()).save(any(ProductModel.class));
     }
 
     @Test
-    void deactivateProduct_shouldMarkProductAsInactive() {
+    void deactivateProduct_shouldMarkProductAsInactiveAndChangeState() {
         when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+        when(estadoProductoRepository.findByNombre("inactivo")).thenReturn(Optional.of(estadoInactivo));
         when(productRepository.save(product)).thenReturn(product);
 
         ProductResponseDto result = productService.deactivateProduct(1L);
 
         assertThat(result.getActivo()).isFalse();
-        assertThat(product.getActivo()).isFalse();
+        assertThat(result.getEstadoId()).isEqualTo(2L);
+        assertThat(result.getEstado()).isEqualTo("Inactivo");
+        assertThat(product.getEstado()).isSameAs(estadoInactivo);
         verify(productRepository).save(product);
+    }
+
+    @Test
+    void deactivateProduct_shouldThrowWhenProductDoesNotExist() {
+        when(productRepository.findById(99L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> productService.deactivateProduct(99L))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessage("Producto no encontrado con id: 99");
+        verify(productRepository, never()).save(any(ProductModel.class));
     }
 }

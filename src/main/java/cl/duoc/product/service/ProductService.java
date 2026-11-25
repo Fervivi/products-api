@@ -27,6 +27,12 @@ public class ProductService {
     private final EstadoProductoRepository estadoProductoRepository;
     private final CategoriaRepository categoriaRepository;
 
+    /** Nombre (columna estados_producto.nombre) del estado que permite vender un producto. */
+    static final String ESTADO_ACTIVO = "activo";
+
+    /** Estado que se asigna al desactivar (eliminación lógica) un producto. */
+    static final String ESTADO_INACTIVO = "inactivo";
+
     public ProductResponseDto mapToResponseDto(ProductModel product) {
 
         ProductResponseDto response = new ProductResponseDto();
@@ -40,7 +46,9 @@ public class ProductService {
         response.setPrecio(product.getPrecio());
         response.setStock(product.getStock());
         response.setCategoriaId(product.getCategoria().getId());
+        response.setCategoria(product.getCategoria().getNombreMostrar());
         response.setEstadoId(product.getEstado().getId());
+        response.setEstado(product.getEstado().getLabel());
         response.setActivo(product.getActivo());
 
         return response;
@@ -58,8 +66,7 @@ public class ProductService {
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(getCategoria(request.getCategoriaId()));
-        product.setEstado(getEstado(request.getEstadoId()));
-        product.setActivo(true);
+        applyEstado(product, getEstado(request.getEstadoId()));
 
         ProductModel savedProduct = productRepository.save(product);
 
@@ -103,7 +110,7 @@ public class ProductService {
         product.setPrecio(request.getPrecio());
         product.setStock(request.getStock());
         product.setCategoria(getCategoria(request.getCategoriaId()));
-        product.setEstado(getEstado(request.getEstadoId()));
+        applyEstado(product, getEstado(request.getEstadoId()));
 
         return mapToResponseDto(productRepository.save(product));
     }
@@ -113,9 +120,22 @@ public class ProductService {
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con id: " + id));
 
-        product.setActivo(false);
+        EstadoProducto inactivo = estadoProductoRepository
+                .findByNombre(ESTADO_INACTIVO)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Estado de producto no encontrado: " + ESTADO_INACTIVO));
+        applyEstado(product, inactivo);
 
         return mapToResponseDto(productRepository.save(product));
+    }
+
+    /**
+     * Asigna el estado y mantiene sincronizado el flag {@code activo}: un producto solo se considera activo (visible en
+     * la tienda) cuando su estado es "activo".
+     */
+    private void applyEstado(ProductModel product, EstadoProducto estado) {
+        product.setEstado(estado);
+        product.setActivo(ESTADO_ACTIVO.equals(estado.getNombre()));
     }
 
     private Categoria getCategoria(Long id) {

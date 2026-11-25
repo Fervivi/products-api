@@ -17,7 +17,6 @@ import cl.duoc.product.model.EstadoProducto;
 import cl.duoc.product.repository.ColumnMetadataRepository;
 import cl.duoc.product.repository.EntityMetadataRepository;
 import cl.duoc.product.repository.EstadoProductoRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -69,7 +68,6 @@ class MetadataServiceTest {
         categoriaColumn.setTableName("productos");
         categoriaColumn.setColumnName("categoria_id");
         categoriaColumn.setApiKey("categoria");
-        categoriaColumn.setValueKey("id_categoria");
         categoriaColumn.setLabel("Categoría");
         categoriaColumn.setType("string");
         categoriaColumn.setSortOrder(5);
@@ -114,25 +112,11 @@ class MetadataServiceTest {
         assertThat(metadata.getStates().get(1).getLabel()).isEqualTo("Activo");
         assertThat(metadata.getColumns()).hasSize(2);
         assertThat(metadata.getColumns().getFirst().getKey()).isEqualTo("categoria");
-        assertThat(metadata.getColumns().getFirst().getValueKey()).isEqualTo("id_categoria");
-        assertThat(metadata.getColumns().get(1).getValueKey()).isNull();
-    }
-
-    @Test
-    void columnMetadata_shouldOmitNullValueKeyInJson() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        String categoriaJson = objectMapper.writeValueAsString(categoriaColumn());
-        String nombreJson = objectMapper.writeValueAsString(nombreColumn());
-
-        assertThat(categoriaJson).contains("\"valueKey\":\"id_categoria\"");
-        assertThat(nombreJson).doesNotContain("valueKey");
     }
 
     private MetadataDto.ColumnMetadata categoriaColumn() {
         return new MetadataDto.ColumnMetadata(
                 categoriaColumn.getApiKey(),
-                categoriaColumn.getValueKey(),
                 categoriaColumn.getLabel(),
                 categoriaColumn.getType(),
                 categoriaColumn.isShowInCreate(),
@@ -148,7 +132,6 @@ class MetadataServiceTest {
     private MetadataDto.ColumnMetadata nombreColumn() {
         return new MetadataDto.ColumnMetadata(
                 nombreColumn.getApiKey(),
-                nombreColumn.getValueKey(),
                 nombreColumn.getLabel(),
                 nombreColumn.getType(),
                 nombreColumn.isShowInCreate(),

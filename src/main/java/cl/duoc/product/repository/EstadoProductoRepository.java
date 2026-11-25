@@ -7,6 +7,10 @@
 package cl.duoc.product.repository;
 
 import cl.duoc.product.model.EstadoProducto;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EstadoProductoRepository extends JpaRepository<EstadoProducto, Long> {}
+public interface EstadoProductoRepository extends JpaRepository<EstadoProducto, Long> {
+
+    Optional<EstadoProducto> findByNombre(String nombre);
+}

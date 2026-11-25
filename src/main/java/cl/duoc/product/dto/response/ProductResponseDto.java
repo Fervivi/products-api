@@ -27,10 +27,15 @@ public class ProductResponseDto {
     @Schema(description = "Código SKU del producto", example = "PD-101")
     private String sku;
 
-    @Schema(description = "Descripción comercial del producto", example = "Alimento seco para perros adultos de raza mediana y grande")
+    @Schema(
+            description = "Descripción comercial del producto",
+            example = "Alimento seco para perros adultos de raza mediana y grande")
     private String descripcion;
 
-    @Schema(description = "Características o especificaciones técnicas del producto", example = "Formato seco de 15 kg con proteínas de alta calidad, vitaminas y minerales para perros adultos de raza mediana y grande.")
+    @Schema(
+            description = "Características o especificaciones técnicas del producto",
+            example =
+                    "Formato seco de 15 kg con proteínas de alta calidad, vitaminas y minerales para perros adultos de raza mediana y grande.")
     private String caracteristicas;
 
     @Schema(description = "URL de la imagen del producto", example = "https://placehold.co/600x400?text=PD-101")
@@ -45,8 +50,14 @@ public class ProductResponseDto {
     @Schema(description = "Identificador de la categoría del producto", example = "1")
     private Long categoriaId;
 
+    @Schema(description = "Nombre de la categoría para mostrar en la tienda", example = "Alimentos")
+    private String categoria;
+
     @Schema(description = "Identificador del estado del producto", example = "1")
     private Long estadoId;
+
+    @Schema(description = "Nombre legible del estado del producto", example = "Activo")
+    private String estado;
 
     @Deprecated
     @Schema(description = "(DEPRECATED) Indica si el producto está activo", example = "true", deprecated = true)
